@@ -41,7 +41,7 @@ void tokenize_input(char * input, int length){
     while(token != NULL){
         printf("%s\n", token);
 
-        //Check if all bowling input pin is of length 1: ex- X-X-X-X-X-X-X
+        //Check if all bowling input pin is of length 1: ex- X-X-X-X-X-X-X :
 
         if(strlen(token) == 1){
 
@@ -64,8 +64,10 @@ void tokenize_input(char * input, int length){
                 
             }
         }
-        //Check if the bowling input pin is of length 2: ex- 5/-5/-5/-5/-5/
+        //Check if the bowling input pin is of length 2: ex- 5/-5/-5/-5/-5/ :
         else if(strlen(token) == 2){    
+
+            //If the first or second input is a strike "X", check for the next two pins and calculate the sum:
             if(token[0] == 'X' || token[1] == 'X'){
                 strike = 1;
                 sum += charToInt(token[0]) + charToInt(token[1]);
@@ -77,8 +79,10 @@ void tokenize_input(char * input, int length){
                 else{
                     sum += token[0];
                 }
-                //sum += (token == NULL) ? 0 : token[0];
+                
             }
+
+            //Calculate sum of two throws if neither are a strike "X" or spare "\" :
             else{
                 int a = charToInt((char)token[0]);
                 int b = charToInt((char)token[1]);
@@ -87,16 +91,19 @@ void tokenize_input(char * input, int length){
             }
             
         }
+
+        //If there are no more tokens to parse, end the loop:
         else if(token == NULL){
             printf("\n null\n");
             break;
         }
 
-        //token = strtok(NULL, sequence);
+        
         token = (strike == 0) ? strtok(NULL, sequence) : token;
         strike = (strike == 1) ? 0 : 0;
     }
 
+    //Print the total sum:
     printf("Sum: %d\n", sum);
     
 }
